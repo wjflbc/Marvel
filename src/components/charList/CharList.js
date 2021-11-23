@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import {Component} from 'react';
 import MarvelService from "../../services/MarvelService";
 import Spinner from "../spiner/spiner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -42,7 +42,6 @@ class CharList extends Component {
     renderChars = (arr) => {
         return arr.map((item) => {
             const {thumbnail, name, id} = item;
-            console.log(thumbnail)
 
             let styleImg = {'objectFit' : 'cover'};
 
@@ -51,7 +50,8 @@ class CharList extends Component {
             }
             return (
                 <li className="char__item"
-                    key={id}>
+                    key={id}
+                    onClick={() => this.props.onCharSelected(id)}>
                     <img src={thumbnail} alt={name} style={styleImg}/>
                     <div className="char__name">{name}</div>
                 </li>
@@ -78,48 +78,11 @@ class CharList extends Component {
 
         return (
             <div className="char__list">
-                {spiner}
-                {errorMeessage}
-                {content}
-                <ul className="char__grid">
-                    {charAll}
 
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item char__item_selected">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
-                    {/*<li className="char__item">*/}
-                    {/*    <img src={abyss} alt="abyss"/>*/}
-                    {/*    <div className="char__name">Abyss</div>*/}
-                    {/*</li>*/}
+                <ul className="char__grid">
+                    {spiner}
+                    {errorMeessage}
+                    {content}
                 </ul>
                 <button className="button button__main button__long">
                     <div className="inner">load more</div>
