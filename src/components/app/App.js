@@ -10,7 +10,8 @@ import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 class App extends Component {
 
      state = {
-         selectedChar: null
+         selectedChar: null,
+         chooseItem: false
      }
 
      onCharSelected = (id) => {
@@ -18,6 +19,7 @@ class App extends Component {
              selectedChar: id
          })
      }
+
 
     render() {
         return (
@@ -29,7 +31,8 @@ class App extends Component {
                     </ErrorBoundary>
                     <div className="char__content">
                         <ErrorBoundary>
-                            <CharList onCharSelected={this.onCharSelected}/>
+                            <CharList
+                                onCharSelected={this.onCharSelected}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
                             <CharInfo charId={this.state.selectedChar}/>

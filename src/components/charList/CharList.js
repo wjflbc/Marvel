@@ -2,6 +2,7 @@ import {Component} from 'react';
 import MarvelService from "../../services/MarvelService";
 import Spinner from "../spiner/spiner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import PropTypes from 'prop-types';
 
 import './charList.scss';
 
@@ -55,10 +56,22 @@ class CharList extends Component {
         }))
     }
 
+    itemsRef = [];
+
+    setRef = (ref) => {
+       this.itemsRef.push(ref);
+    }
+
+    onItemFocus = (id) => {
+        this.itemsRef.forEach(item => item.classList.remove('char__item_selected'));
+        this.itemsRef[id].classList.add('char__item_selected');
+        this.itemsRef[id].focus();
+    }
 
 
     renderChars = (arr) => {
-        return arr.map((item) => {
+
+        return arr.map((item, i) => {
             const {thumbnail, name, id} = item;
 
             let styleImg = {'objectFit' : 'cover'};
@@ -66,11 +79,28 @@ class CharList extends Component {
             if (thumbnail ==='http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                styleImg = {'objectFit' : 'contain'};
             }
+
             return (
-                <li className="char__item"
+                <li className='char__item'
                     key={id}
-                    onClick={() => this.props.onCharSelected(id)}>
-                    <img src={thumbnail} alt={name} style={styleImg}/>
+                    onClick={() => {
+                        this.props.onCharSelected(id);
+                        this.onItemFocus(i);
+                        }
+                    }
+                    ref={this.setRef}
+
+                    onKeyPress={(e) => {
+                            if (e.key === "" || e.key === 'Enter') {
+                                this.props.onCharSelected(id);
+                                this.onItemFocus(i);
+                            }
+                        }
+                    }>
+                    <img
+                        src={thumbnail}
+                        alt={name}
+                        style={styleImg}/>
                     <div className="char__name">{name}</div>
                 </li>
             )
@@ -112,6 +142,10 @@ class CharList extends Component {
             </div>
         )
     }
+}
+
+CharList.propTypes = {
+    onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
