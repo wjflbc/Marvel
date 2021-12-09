@@ -27,7 +27,6 @@ const ComicsList = () => {
     }
 
     const onComicsListLoaded = (newComicsList) => {
-        console.log(newComicsList)
         let ended = false
         if (newComicsList.length < 8) {
             ended = true
