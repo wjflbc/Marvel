@@ -4,6 +4,7 @@ import AppHeader from "../appHeader/AppHeader";
 import MainPage from "../pages/MainPage";
 import ComicsPage from "../pages/ComicsPage";
 import Page404 from "../pages/404";
+import SingleComicPage from "../pages/SingleComicPage";
 
 const App = () => {
 
@@ -18,6 +19,9 @@ const App = () => {
                         </Route>
                         <Route exact path="/comics">
                             <ComicsPage/>
+                        </Route>
+                        <Route exact path="/comics/:comicId">
+                            <SingleComicPage/>
                         </Route>
                         <Route exact path="*">
                             <Page404/>
